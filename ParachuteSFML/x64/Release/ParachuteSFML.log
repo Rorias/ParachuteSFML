@@ -1,0 +1,21 @@
+﻿  Player.cpp
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(15,48): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(16,49): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(18,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(18,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(19,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\Player.cpp(19,27): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating code
+  1 of 74 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ParachuteSFML.vcxproj -> C:\Data\HKU\Jaar 2\KernmoduleJaar1\ParachuteSFML\ParachuteSFML\x64\Release\ParachuteSFML.exe
