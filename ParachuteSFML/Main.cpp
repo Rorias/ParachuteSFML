@@ -1,14 +1,16 @@
 #include "Main.h"
 
-const static int poolSize = 8;
-static Parachutist* enemyPool[8];
+const static int poolSize = 4;
+static Parachutist* enemyPool[4];
+static int totalCount = 0;
 
 int main()
 {
 	Player* p = new Player();
 	Helicopter* h = new Helicopter();
+	Score* s = new Score();
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML Works!");
+	sf::RenderWindow window(sf::VideoMode(800, 836), "Game&Watch Parachuters");
 
 	window.setFramerateLimit(120);
 
@@ -21,11 +23,14 @@ int main()
 		}
 
 		window.clear(sf::Color::White);
-		h->Timer();
 
+		h->Timer();
 		if (h->dropping)
 		{
-			Main::AddEnemy(new Parachutist(h->x));
+			totalCount++;
+			std::cout << "total: ";
+			std::cout << totalCount;
+			Main::AddEnemy(new Parachutist(h->x, h->speed));
 			h->dropping = false;
 		}
 
@@ -36,13 +41,33 @@ int main()
 		{
 			if (enemyPool[i] != NULL)
 			{
-				enemyPool[i]->Move();
 				window.draw(enemyPool[i]->Display());
+
+				if (p->Collide(enemyPool[i]))
+				{
+					s->Increment();
+					Main::RemoveEnemy(enemyPool[i]);
+					break;
+				}
+
+				if (enemyPool[i]->Move())
+				{
+					s->Miss();
+					Main::RemoveEnemy(enemyPool[i]);
+					break;
+				}
 			}
 		}
 
 		window.draw(p->Display());
 		window.draw(h->Display());
+		window.draw(s->Display());
+
+		window.draw(s->sprite1);
+		window.draw(s->sprite2);
+		window.draw(s->sprite3);
+			
+		s->CheckGoal();
 
 		window.display();
 	}
@@ -58,7 +83,6 @@ void Main::AddEnemy(Parachutist* p)
 			return;
 		}
 	}
-	//paniek (teveel enemies)
 }
 
 void Main::RemoveEnemy(Parachutist* p)
@@ -72,5 +96,4 @@ void Main::RemoveEnemy(Parachutist* p)
 			return;
 		}
 	}
-	//paniek (enemy lost)
 }

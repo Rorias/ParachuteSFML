@@ -2,6 +2,7 @@
 #include "Parachutist.h"
 #include "Player.h"
 #include "Helicopter.h"
+#include "Score.h"
 
 class Main
 {

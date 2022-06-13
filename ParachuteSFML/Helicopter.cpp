@@ -50,7 +50,7 @@ void Helicopter::Timer()
 	if (dropTime <= 0)
 	{
 		dropTime = maxDropTime;
-		maxDropTime -= 0.25f;
+		if (maxDropTime > 2.5f) { maxDropTime -= 0.25f; }
 		dropping = true;
 	}
 }

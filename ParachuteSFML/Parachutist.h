@@ -4,14 +4,19 @@
 class Parachutist : public Entity
 {
 public:
-	Parachutist(float x);
+	Parachutist(float x, float speed);
 	~Parachutist();
 
 	sf::Sprite Display();
-	void Move();
+	bool Move();
 	void Destroy();
 
 private:
-	Entity* entity;
+	sf::Texture texture2;
+	bool maxDropReached = false;
+	float xvel = 2.0f;
+	float yvel = 0.5f;
+	float accel = 0.02f;
+	float decel = 0.01f;
 };
 

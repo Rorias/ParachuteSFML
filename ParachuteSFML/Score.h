@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 
 class Score
 {
@@ -6,11 +7,23 @@ public:
 	Score();
 	~Score();
 
-	void Display();
+	sf::Text Display();
 	void Increment();
+	void Miss();
 	void CheckGoal();
 
-private:
+	sf::Sprite sprite1;
+	sf::Sprite sprite2;
+	sf::Sprite sprite3;
 
+private:
+	sf::Font font;
+	sf::Text text;
+
+	sf::Texture texture;
+
+
+	int score = 0;
+	int miss = 0;
 };
 

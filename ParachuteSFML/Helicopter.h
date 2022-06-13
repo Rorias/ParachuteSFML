@@ -12,9 +12,10 @@ public:
 	void Move();
 	void Timer();
 
+	float speed = 2.0f;
 	bool dropping = false;
+
 private:
-	float speed = 1.5f;
 	float dropTime = 1.0f;
 	float maxDropTime = 6.0f;
 };
