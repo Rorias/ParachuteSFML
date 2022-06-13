@@ -8,12 +8,12 @@ Parachutist::Parachutist(float x, float speed)
 	if (!texture.loadFromFile(s))
 	{
 		return;
-	};
+	}
 
 	if (!texture2.loadFromFile(s2))
 	{
 		return;
-	};
+	}
 
 	sprite.setTexture(texture);
 	sprite.setScale(0.5f, 0.5f);
@@ -30,13 +30,6 @@ Parachutist::Parachutist(float x, float speed)
 
 	xvel = speed;
 	yvel = 0.5f;
-
-	std::cout << "\n---------------\n";
-	std::cout << "new parachutist: \n";
-	std::cout << x;
-	std::cout << "\n";
-	std::cout << xOffset;
-	std::cout << "\n---------------\n";
 }
 
 Parachutist::~Parachutist() {}
@@ -71,6 +64,11 @@ bool Parachutist::Move()
 		sprite.setOrigin(xOffset / sprite.getScale().x, yOffset / sprite.getScale().y);
 	}
 
+	if (maxDropReached)
+	{
+		sprite.rotate(1);
+	}
+
 	if (xvel > 0.02f)
 	{
 		xvel = xvel - decel;
@@ -91,9 +89,8 @@ bool Parachutist::Move()
 
 	sprite.move(xvel, yvel);
 
-	if (sprite.getPosition().y >= 800 + yOffset)
+	if (sprite.getPosition().y >= 836 + yOffset)
 	{
-		std::cout << "missed a parachutist\n";
 		return true;
 	}
 

@@ -20,7 +20,7 @@ Score::Score()
 	if (!texture.loadFromFile(s2))
 	{
 		return;
-	};
+	}
 
 	sprite1.setScale(0.4f, 0.4f);
 	sprite2.setScale(0.4f, 0.4f);
@@ -47,10 +47,10 @@ void Score::Increment()
 
 void Score::Miss()
 {
-	if (miss < 3)
-	{
-		miss++;
+	miss++;
 
+	if (miss < 4)
+	{
 		switch (miss)
 		{
 			case 1:
@@ -68,7 +68,15 @@ void Score::Miss()
 
 void Score::CheckGoal()
 {
-	if (miss >= 3) {}
+	if (miss >= 4)
+	{
+		std::cout << "Game over";
+		gameOver = true;
+	}
 
-	if (score >= 15) {}
+	if (score >= 15)
+	{
+		std::cout << "Game won";
+		gameWin = true;
+	}
 }

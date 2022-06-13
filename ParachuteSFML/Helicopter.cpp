@@ -7,7 +7,7 @@ Helicopter::Helicopter()
 	if (!texture.loadFromFile(s))
 	{
 		return;
-	};
+	}
 
 	sprite.setTexture(texture);
 	sprite.setScale(0.5f, 0.5f);

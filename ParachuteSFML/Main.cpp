@@ -2,7 +2,6 @@
 
 const static int poolSize = 4;
 static Parachutist* enemyPool[4];
-static int totalCount = 0;
 
 int main()
 {
@@ -24,50 +23,83 @@ int main()
 
 		window.clear(sf::Color::White);
 
-		h->Timer();
-		if (h->dropping)
+		if (!s->gameOver && !s->gameWin)
 		{
-			totalCount++;
-			std::cout << "total: ";
-			std::cout << totalCount;
-			Main::AddEnemy(new Parachutist(h->x, h->speed));
-			h->dropping = false;
-		}
-
-		p->Move();
-		h->Move();
-
-		for (int i = 0; i < poolSize; i++)
-		{
-			if (enemyPool[i] != NULL)
+			h->Timer();
+			if (h->dropping)
 			{
-				window.draw(enemyPool[i]->Display());
+				Main::AddEnemy(new Parachutist(h->x, h->speed));
+				h->dropping = false;
+			}
 
-				if (p->Collide(enemyPool[i]))
-				{
-					s->Increment();
-					Main::RemoveEnemy(enemyPool[i]);
-					break;
-				}
+			p->Move();
+			h->Move();
 
-				if (enemyPool[i]->Move())
+			for (int i = 0; i < poolSize; i++)
+			{
+				if (enemyPool[i] != NULL)
 				{
-					s->Miss();
-					Main::RemoveEnemy(enemyPool[i]);
-					break;
+					window.draw(enemyPool[i]->Display());
+
+					if (p->Collide(enemyPool[i]))
+					{
+						s->Increment();
+						Main::RemoveEnemy(enemyPool[i]);
+						break;
+					}
+
+					if (enemyPool[i]->Move())
+					{
+						s->Miss();
+						Main::RemoveEnemy(enemyPool[i]);
+						break;
+					}
 				}
 			}
+
+			window.draw(p->Display());
+			window.draw(h->Display());
+			window.draw(s->Display());
+
+			window.draw(s->sprite1);
+			window.draw(s->sprite2);
+			window.draw(s->sprite3);
+
+			s->CheckGoal();
+
 		}
+		else if (s->gameOver)
+		{
+			//show lose screen
+			sf::Font font;
+			sf::Text text;
+			sf::Texture texture;
+			sf::Sprite sprite;
 
-		window.draw(p->Display());
-		window.draw(h->Display());
-		window.draw(s->Display());
+			std::string s = "assets/arial.ttf";
 
-		window.draw(s->sprite1);
-		window.draw(s->sprite2);
-		window.draw(s->sprite3);
-			
-		s->CheckGoal();
+			if (!font.loadFromFile(s)) {}
+
+			text.setFont(font);
+			text.setString("Game Over");
+			text.setCharacterSize(64);
+			text.setFillColor(sf::Color::Black);
+			text.setPosition(240, 300);
+
+			std::string s2 = "assets/sharkdeath.png";
+
+			if (!texture.loadFromFile(s2)) {}
+
+			sprite.setTexture(texture);
+			sprite.setPosition(200, 400);
+
+			window.draw(text);
+			window.draw(sprite);
+		}
+		else if (s->gameWin)
+		{
+			//show win screen
+		}
 
 		window.display();
 	}

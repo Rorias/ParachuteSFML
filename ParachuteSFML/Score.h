@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Score
 {
@@ -16,12 +17,13 @@ public:
 	sf::Sprite sprite2;
 	sf::Sprite sprite3;
 
+	bool gameOver = false;
+	bool gameWin = false;
+
 private:
 	sf::Font font;
 	sf::Text text;
-
 	sf::Texture texture;
-
 
 	int score = 0;
 	int miss = 0;
