@@ -1,17 +1,17 @@
 #pragma once
-#include "Position.h"
+#include "Entity.h"
 
-class Parachutist : public Position
+class Parachutist : public Entity
 {
 public:
-	Parachutist();
+	Parachutist(float x);
 	~Parachutist();
 
-	void Display();
+	sf::Sprite Display();
 	void Move();
 	void Destroy();
 
 private:
-
+	Entity* entity;
 };
 

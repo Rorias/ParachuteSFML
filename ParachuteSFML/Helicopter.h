@@ -1,21 +1,21 @@
 #pragma once
-#include "Position.h"
-#include <SFML/Graphics.hpp>
+#include "Entity.h"
+#include "Parachutist.h"
 
-class Helicopter : public Position
+class Helicopter : public Entity
 {
 public:
 	Helicopter();
 	~Helicopter();
 
-	void Display();
+	sf::Sprite Display();
 	void Move();
-	void Drop(long t);
+	void Timer();
 
+	bool dropping = false;
 private:
-	sf::Texture texture;
-	sf::Sprite heliSprite;
-	int xOffset;
-	int yOffset;
+	float speed = 1.5f;
+	float dropTime = 1.0f;
+	float maxDropTime = 6.0f;
 };
 

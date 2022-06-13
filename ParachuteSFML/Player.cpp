@@ -9,36 +9,74 @@ Player::Player()
 		return;
 	};
 
-	playerSprite.setTexture(texture);
-	playerSprite.setScale(0.5f, 0.5f);
+	sprite.setTexture(texture);
+	sprite.setScale(0.5f, 0.5f);
 
-	xOffset = playerSprite.getLocalBounds().width / 2;
-	yOffset = playerSprite.getLocalBounds().height / 2;
+	xOffset = (sprite.getLocalBounds().width * sprite.getScale().x) / 2;
+	yOffset = (sprite.getLocalBounds().height * sprite.getScale().y) / 2;
 
-	playerSprite.setOrigin(xOffset, yOffset);
-	playerSprite.setPosition(xOffset, 663 + yOffset);
+	minBound = xOffset;
+	maxBound = 800 - xOffset;
+
+	sprite.setOrigin(xOffset / sprite.getScale().x, yOffset / sprite.getScale().y);
+	sprite.setPosition(600 + xOffset, 800 - yOffset);
 }
 Player::~Player() {}
 
 sf::Sprite Player::Display()
 {
-	return playerSprite;
+	return sprite;
 }
 
 void Player::Move()
 {
+	bool left = false;
+	bool right = false;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 	{
-		playerSprite.move(-0.1f, 0);
+		left = true;
+		if (-3 < vel) { vel = vel - accel; }
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
-		playerSprite.move(0.1f, 0);
+		right = true;
+		if (vel < 3) { vel = vel + accel; }
 	}
+
+	if (!left && !right)
+	{
+		if (vel > 0.02f)
+		{
+			vel = vel - decel;
+		}
+		else if (vel < -0.02)
+		{
+			vel = vel + decel;
+		}
+		else
+		{
+			vel = 0;
+		}
+	}
+
+	if (sprite.getPosition().x < minBound)
+	{
+		sprite.setPosition(minBound, sprite.getPosition().y);
+		vel = 0;
+	}
+
+	if (sprite.getPosition().x > maxBound)
+	{
+		sprite.setPosition(maxBound, sprite.getPosition().y);
+		vel = 0;
+	}
+
+	sprite.move(vel, 0);
 }
 
-bool Player::Collide(Position p)
+bool Player::Collide(Entity* p)
 {
 	return true;
 }

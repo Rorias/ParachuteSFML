@@ -1,10 +1,7 @@
 #pragma once
-#include "Position.h"
-#include "Keys.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#include "Entity.h"
 
-class Player : public Position
+class Player : public Entity
 {
 public:
 	Player();
@@ -12,12 +9,11 @@ public:
 
 	sf::Sprite Display();
 	void Move();
-	bool Collide(Position p);
+	bool Collide(Entity* p);
 
 private:
-	sf::Texture texture;
-	sf::Sprite playerSprite;
-	int xOffset;
-	int yOffset;
+	float vel = 0.0f;
+	float accel = 0.02f;
+	float decel = 0.04f;
 };
 

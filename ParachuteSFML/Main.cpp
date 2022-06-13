@@ -1,29 +1,16 @@
 #include "Main.h"
-#include "Player.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
+
+const static int poolSize = 8;
+static Parachutist* enemyPool[8];
 
 int main()
 {
 	Player* p = new Player();
+	Helicopter* h = new Helicopter();
 
-	sf::RenderWindow window(sf::VideoMode(1000, 800), "SFML Works!");
+	sf::RenderWindow window(sf::VideoMode(800, 800), "SFML Works!");
 
-	//sf::Texture texture;
-	//std::string s = "assets/parachutist.png";
-
-	//if (!texture.loadFromFile(s))
-	//{
-	//	std::cout << "Couldnt find file in " + s;
-	//	return 0;
-	//};
-
-	//sf::Sprite paraSprite;
-	//paraSprite.setTexture(texture);
-	//paraSprite.setScale(0.5f, 0.5f);
-	//paraSprite.setOrigin(65.f, 65.f);
-	//paraSprite.setPosition(65.f, 65.f);
-	//paraSprite.setRotation(45.f);
+	window.setFramerateLimit(120);
 
 	while (window.isOpen())
 	{
@@ -34,8 +21,56 @@ int main()
 		}
 
 		window.clear(sf::Color::White);
+		h->Timer();
+
+		if (h->dropping)
+		{
+			Main::AddEnemy(new Parachutist(h->x));
+			h->dropping = false;
+		}
+
 		p->Move();
+		h->Move();
+
+		for (int i = 0; i < poolSize; i++)
+		{
+			if (enemyPool[i] != NULL)
+			{
+				enemyPool[i]->Move();
+				window.draw(enemyPool[i]->Display());
+			}
+		}
+
 		window.draw(p->Display());
+		window.draw(h->Display());
+
 		window.display();
 	}
+}
+
+void Main::AddEnemy(Parachutist* p)
+{
+	for (int i = 0; i < poolSize; i++)
+	{
+		if (enemyPool[i] == NULL)
+		{
+			enemyPool[i] = p;
+			return;
+		}
+	}
+	//paniek (teveel enemies)
+}
+
+void Main::RemoveEnemy(Parachutist* p)
+{
+	for (int i = 0; i < poolSize; i++)
+	{
+		if (enemyPool[i] == p)
+		{
+			enemyPool[i] = NULL;
+			p->Destroy();
+			return;
+		}
+	}
+	//paniek (enemy lost)
 }
