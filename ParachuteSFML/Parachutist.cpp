@@ -72,12 +72,14 @@ bool Parachutist::Move()
 			rotdir = -rotdir;
 		}
 		rotate += rotdir;
-		//rotate between -30, 30
+
+		//move between -5, 5
 		if (xwiggle < -5 || xwiggle>5)
 		{
 			xwiggledir = -xwiggledir;
 		}
-		 xwiggle += xwiggledir;
+		xwiggle += xwiggledir;
+
 		sprite.setRotation(rotate);
 		sprite.move(xwiggle, 0);
 	}

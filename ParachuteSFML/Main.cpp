@@ -68,7 +68,7 @@ int main()
 			s->CheckGoal();
 
 		}
-		else if (s->gameOver)
+		else
 		{
 			//show lose screen
 			sf::Font font;

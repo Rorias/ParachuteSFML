@@ -41,8 +41,7 @@ sf::Text Score::Display()
 void Score::Increment()
 {
 	score++;
-	std::string s = std::to_string(score);
-	text.setString("Score: " + s);
+	text.setString("Score: " + std::to_string(score));
 }
 
 void Score::Miss()

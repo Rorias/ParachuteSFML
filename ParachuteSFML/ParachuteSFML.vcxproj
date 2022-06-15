@@ -20,9 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helicopter.h" />
-    <ClInclude Include="Keys.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Math.h" />
     <ClInclude Include="Parachutist.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Entity.h" />
@@ -30,9 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Helicopter.cpp" />
-    <ClCompile Include="Keys.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Parachutist.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Entity.cpp" />
