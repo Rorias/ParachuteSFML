@@ -64,15 +64,15 @@ void Player::Move()
 		}
 	}
 
-	if (sprite.getPosition().x < minBound)
+	if (x < minBound)
 	{
-		sprite.setPosition(minBound, sprite.getPosition().y);
+		sprite.setPosition(minBound, y);
 		vel = 0;
 	}
 
-	if (sprite.getPosition().x > maxBound)
+	if (x > maxBound)
 	{
-		sprite.setPosition(maxBound, sprite.getPosition().y);
+		sprite.setPosition(maxBound, y);
 		vel = 0;
 	}
 

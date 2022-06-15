@@ -51,7 +51,7 @@ bool Parachutist::Move()
 	else if (yvel >= 3.0f)
 	{
 		maxDropReached = true;
-		yvel = 1.5f;
+		yvel = 1.25f;
 
 		sprite.setTexture(texture2, true);
 
@@ -66,7 +66,20 @@ bool Parachutist::Move()
 
 	if (maxDropReached)
 	{
-		sprite.rotate(1);
+		//rotate between -30, 30
+		if (rotate < -30 || rotate>30)
+		{
+			rotdir = -rotdir;
+		}
+		rotate += rotdir;
+		//rotate between -30, 30
+		if (xwiggle < -5 || xwiggle>5)
+		{
+			xwiggledir = -xwiggledir;
+		}
+		 xwiggle += xwiggledir;
+		sprite.setRotation(rotate);
+		sprite.move(xwiggle, 0);
 	}
 
 	if (xvel > 0.02f)
@@ -82,14 +95,14 @@ bool Parachutist::Move()
 		xvel = 0;
 	}
 
-	if (sprite.getPosition().x >= maxBound || sprite.getPosition().x <= minBound)
+	if (x >= maxBound || x <= minBound)
 	{
 		xvel = -xvel;
 	}
 
 	sprite.move(xvel, yvel);
 
-	if (sprite.getPosition().y >= 836 + yOffset)
+	if (y >= 836 + yOffset)
 	{
 		return true;
 	}

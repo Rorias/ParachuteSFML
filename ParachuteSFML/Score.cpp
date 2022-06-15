@@ -70,13 +70,6 @@ void Score::CheckGoal()
 {
 	if (miss >= 4)
 	{
-		std::cout << "Game over";
 		gameOver = true;
-	}
-
-	if (score >= 15)
-	{
-		std::cout << "Game won";
-		gameWin = true;
 	}
 }

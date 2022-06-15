@@ -23,7 +23,7 @@ int main()
 
 		window.clear(sf::Color::White);
 
-		if (!s->gameOver && !s->gameWin)
+		if (!s->gameOver)
 		{
 			h->Timer();
 			if (h->dropping)
@@ -95,10 +95,6 @@ int main()
 
 			window.draw(text);
 			window.draw(sprite);
-		}
-		else if (s->gameWin)
-		{
-			//show win screen
 		}
 
 		window.display();

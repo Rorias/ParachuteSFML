@@ -31,12 +31,12 @@ sf::Sprite Helicopter::Display()
 
 void Helicopter::Move()
 {
+	sprite.move(speed, 0);
+
 	x = sprite.getPosition().x;
 	y = sprite.getPosition().y;
 
-	sprite.move(speed, 0);
-
-	if (sprite.getPosition().x >= maxBound || sprite.getPosition().x <= minBound)
+	if (x >= maxBound || x <= minBound)
 	{
 		speed = -speed;
 		sprite.scale(-1, 1);

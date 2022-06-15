@@ -18,5 +18,9 @@ private:
 	float yvel = 0.5f;
 	float accel = 0.02f;
 	float decel = 0.01f;
+	float rotate = 30;
+	float rotdir = 0.6f;
+	float xwiggle = 0;
+	float xwiggledir = 0.1f;
 };
 
